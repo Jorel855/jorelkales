@@ -1,35 +1,459 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jorel Kales - Estratega de Marketing Digital</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f8fafc;
-    }
-    .gradient-bg {
-      background: linear-gradient(to right, #6366f1, #8b5cf6);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jorel Kales - Estratega de Marketing Digital</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+        }
+        .gradient-bg {
+            background: linear-gradient(to right, #6366f1, #8b5cf6); /* Indigo to Violet */
+        }
+        .btn-primary {
+            @apply bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition duration-300 ease-in-out;
+        }
+        .card {
+            @apply bg-white rounded-xl shadow-md p-6 transform hover:scale-105 transition duration-300 ease-in-out;
+        }
+        .input-field {
+            @apply w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500;
+        }
+        /* Simple animation for fade-in-up */
+        @keyframes fadeInMoveUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInMoveUp 0.8s ease-out forwards;
+        }
+        /* Simple animation for fade-in */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        /* Simple animation for bounce-in */
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+            0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+            20% { transform: scale3d(1.1, 1.1, 1.1); }
+            40% { transform: scale3d(0.9, 0.9, 0.9); }
+            60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+            80% { transform: scale3d(0.97, 0.97, 0.97); }
+            100% { opacity: 1; transform: scale3d(1, 1, 1); }
+        }
+        .animate-bounce-in {
+            animation: bounceIn 1s;
+        }
+        /* Loading spinner */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #6366f1; /* Blue */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none; /* Hidden by default */
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body class="text-gray-800">
-  <!-- Hero Section -->
-  <section class="gradient-bg text-white py-20 md:py-32 text-center rounded-b-3xl shadow-xl">
-      <div class="container mx-auto px-4">
-          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
-              Jorel Kales: Impulsando Marcas con Estrategia de Marketing
-          </h1>
-          <p class="text-lg md:text-xl mb-8 opacity-90">
-              Tu socio estratégico para el crecimiento y la visibilidad en el mercado digital.
-          </p>
-          <a href="#contacto" class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition duration-300 ease-in-out inline-block">
-              ¡Hablemos de tu proyecto!
-          </a>
-      </div>
-  </section>
+
+    <!-- Header / Navigation -->
+    <header class="bg-white shadow-sm py-4">
+        <nav class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-indigo-600 rounded-lg p-2 hover:bg-indigo-50 transition duration-300">Jorel Kales</a>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#inicio" class="text-gray-600 hover:text-indigo-600 transition duration-300 p-2 rounded-lg hover:bg-indigo-50">Inicio</a></li>
+                <li><a href="#sobre-mi" class="text-gray-600 hover:text-indigo-600 transition duration-300 p-2 rounded-lg hover:bg-indigo-50">Sobre Mí</a></li>
+                <li><a href="#servicios" class="text-gray-600 hover:text-indigo-600 transition duration-300 p-2 rounded-lg hover:bg-indigo-50">Servicios</a></li>
+                <li><a href="#generador-estrategias" class="text-gray-600 hover:text-indigo-600 transition duration-300 p-2 rounded-lg hover:bg-indigo-50">Estrategias ✨</a></li>
+                <li><a href="#portfolio" class="text-gray-600 hover:text-indigo-600 transition duration-300 p-2 rounded-lg hover:bg-indigo-50">Portfolio</a></li>
+                <li><a href="#contacto" class="text-gray-600 hover:text-indigo-600 transition duration-300 p-2 rounded-lg hover:bg-indigo-50">Contacto</a></li>
+            </ul>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-indigo-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-md py-2 mt-2 rounded-lg mx-4">
+            <ul class="flex flex-col items-center space-y-2">
+                <li><a href="#inicio" class="block w-full text-center py-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg">Inicio</a></li>
+                <li><a href="#sobre-mi" class="block w-full text-center py-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg">Sobre Mí</a></li>
+                <li><a href="#servicios" class="block w-full text-center py-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg">Servicios</a></li>
+                <li><a href="#generador-estrategias" class="block w-full text-center py-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg">Estrategias ✨</a></li>
+                <li><a href="#portfolio" class="block w-full text-center py-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg">Portfolio</a></li>
+                <li><a href="#contacto" class="block w-full text-center py-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="gradient-bg text-white py-20 md:py-32 text-center rounded-b-3xl shadow-xl">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up">
+                Jorel Kales: Impulsando Marcas con Estrategia de Marketing
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-90 animate-fade-in">
+                Tu socio estratégico para el crecimiento y la visibilidad en el mercado digital.
+            </p>
+            <a href="#contacto" class="btn-primary inline-block animate-bounce-in">
+                ¡Hablemos de tu proyecto!
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre-mi" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
+            <div class="md:w-1/2">
+                <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Jorel+Kales" alt="" class="rounded-xl shadow-lg w-full h-auto object-cover">
+            </div>
+            <div class="md:w-1/2 text-center md:text-left">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Sobre Mí: Jorel Kales
+                </h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    Soy Jorel Kales, un apasionado estratega de marketing con más de una década de experiencia ayudando a empresas a conectar con su audiencia y alcanzar sus objetivos comerciales. Mi enfoque se centra en la creación de estrategias personalizadas que combinan creatividad, datos y tecnología para generar resultados tangibles.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    Creo firmemente en el poder de una marca bien posicionada y una comunicación efectiva. Mi misión es transformar tus desafíos de marketing en oportunidades de crecimiento, construyendo una presencia digital sólida y memorable.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
+                Mis Servicios de Marketing
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M15 10V5a3 3 0 00-3-3H9a3 3 0 00-3 3v5m-4 0h12a2 2 0 012 2v5a2 2 0 01-2 2H7a2 2 0 01-2-2v-5a2 2 0 012-2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Estrategia Digital Integral</h3>
+                    <p class="text-gray-600">Desarrollo planes de marketing digital personalizados que abarcan SEO, SEM, redes sociales y email marketing para maximizar tu alcance.</p>
+                </div>
+                <div class="card">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Branding y Posicionamiento</h3>
+                    <p class="text-gray-600">Ayudo a construir una identidad de marca fuerte y coherente, asegurando que tu mensaje resuene con tu público objetivo.</p>
+                </div>
+                <div class="card">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Marketing de Contenidos</h3>
+                    <p class="text-gray-600">Creación de contenido estratégico y de alta calidad (blogs, videos, infografías) que atrae, educa y convierte a tu audiencia.</p>
+                </div>
+                <div class="card">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.592 1L21 12l-4.408 3.592A2 2 0 0118 16a2 2 0 01-2 2H6a2 2 0 01-2-2c0-.592.408-1.11.592-1.408L3 12l4.408-3.592A2 2 0 016 8a2 2 0 012-2h8a2 2 0 012 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Publicidad en Redes Sociales</h3>
+                    <p class="text-gray-600">Gestión y optimización de campañas publicitarias en plataformas como Facebook, Instagram, LinkedIn y Google Ads para un ROI óptimo.</p>
+                </div>
+                <div class="card">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Análisis y Optimización</h3>
+                    <p class="text-gray-600">Monitoreo constante de métricas, análisis de rendimiento y ajustes estratégicos para asegurar el éxito continuo de tus campañas.</p>
+                </div>
+                <div class="card">
+                    <div class="text-indigo-600 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253m9 0c1.168-.776 2.754-1.253 4.5-1.253 1.746 0 3.332.477 4.5 1.253m-4.5 0V14m0-8a2 2 0 100 4 2 2 0 000-4zm-8 8a2 2 0 100 4 2 2 0 000-4zm8 8a2 2 0 100 4 2 2 0 000-4z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Consultoría de Marketing</h3>
+                    <p class="text-gray-600">Asesoramiento experto para resolver tus desafíos de marketing, identificar nuevas oportunidades y capacitar a tu equipo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Strategy Generator Section (Powered by Gemini API) -->
+    <section id="generador-estrategias" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
+                Generador de Ideas de Estrategia ✨
+            </h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                Describe tu negocio o proyecto y obtén ideas de estrategia de marketing personalizadas, cortesía de la inteligencia artificial.
+            </p>
+            <div class="max-w-xl mx-auto bg-gray-50 p-8 rounded-xl shadow-lg">
+                <div class="space-y-6">
+                    <div>
+                        <label for="business-description" class="sr-only">Descripción del Negocio</label>
+                        <textarea id="business-description" rows="6" placeholder="Ej: Soy una pequeña cafetería artesanal que vende café de especialidad y pasteles caseros en el centro de la ciudad." class="input-field resize-y"></textarea>
+                    </div>
+                    <button id="generate-strategy-btn" class="btn-primary w-full flex items-center justify-center">
+                        Generar Estrategia ✨
+                        <div id="loading-spinner" class="loader ml-3" style="display: none;"></div>
+                    </button>
+                    <div id="strategy-results" class="mt-8 p-6 bg-white rounded-lg border border-gray-200 text-left hidden">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Ideas de Estrategia para tu Negocio:</h3>
+                        <div id="results-content" class="prose max-w-none text-gray-700">
+                            <!-- Results will be injected here -->
+                        </div>
+                    </div>
+                    <div id="error-message" class="mt-4 p-4 bg-red-100 text-red-700 rounded-lg hidden">
+                        <!-- Error messages will be injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio/Case Studies Section (Mock Data) -->
+    <section id="portfolio" class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
+                Mi Trabajo Reciente
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-0 overflow-hidden">
+                    <img src="https://placehold.co/600x350/6366f1/ffffff?text=Proyecto+A" alt="" class="w-full h-48 object-cover rounded-t-xl">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Campaña de Lanzamiento para Startup Tech</h3>
+                        <p class="text-gray-600 text-sm">Desarrollo de estrategia de marketing digital completa, resultando en un aumento del 150% en leads cualificados en 3 meses.</p>
+                    </div>
+                </div>
+                <div class="card p-0 overflow-hidden">
+                    <img src="https://placehold.co/600x350/8b5cf6/ffffff?text=Proyecto+B" alt="" class="w-full h-48 object-cover rounded-t-xl">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Rediseño de Marca para E-commerce de Moda</h3>
+                        <p class="text-gray-600 text-sm">Creación de nueva identidad visual y estrategia de contenidos, incrementando el engagement en redes sociales en un 70%.</p>
+                    </div>
+                </div>
+                <div class="card p-0 overflow-hidden">
+                    <img src="https://placehold.co/600x350/c084fc/ffffff?text=Proyecto+C" alt="" class="w-full h-48 object-cover rounded-t-xl">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Optimización SEO para Empresa de Servicios</h3>
+                        <p class="text-gray-600 text-sm">Mejora de ranking en motores de búsqueda, logrando posicionar 5 palabras clave en el top 3 de Google.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
+                Lo que Dicen Mis Clientes
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-8">
+                    <p class="text-gray-700 italic mb-4">
+                        "Trabajar con Jorel ha sido una experiencia transformadora. Su visión estratégica y su capacidad para ejecutar campañas efectivas han llevado nuestra marca a un nuevo nivel. ¡Altamente recomendado!"
+                    </p>
+                    <p class="font-semibold text-gray-800">- Ana García, CEO de Innova Solutions</p>
+                </div>
+                <div class="card p-8">
+                    <p class="text-gray-700 italic mb-4">
+                        "Jorel no solo entiende el marketing, sino que también se sumerge en tu negocio para ofrecer soluciones que realmente funcionan. Gracias a él, hemos visto un crecimiento significativo en nuestras ventas online."
+                    </p>
+                    <p class="font-semibold text-gray-800">- Carlos Ruiz, Director de Marketing de Global Retail</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-16 md:py-24 bg-gray-50 rounded-t-3xl shadow-xl">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
+                Ponte en Contacto
+            </h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                ¿Listo para llevar tu estrategia de marketing al siguiente nivel? Completa el formulario a continuación o contáctame directamente.
+            </p>
+            <div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <form action="#" method="POST" class="space-y-6">
+                    <div>
+                        <label for="name" class="sr-only">Nombre</label>
+                        <input type="text" id="name" name="name" placeholder="Tu Nombre" class="input-field" required>
+                    </div>
+                    <div>
+                        <label for="email" class="sr-only">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Tu Email" class="input-field" required>
+                    </div>
+                    <div>
+                        <label for="subject" class="sr-only">Asunto</label>
+                        <input type="text" id="subject" name="subject" placeholder="Asunto" class="input-field" required>
+                    </div>
+                    <div>
+                        <label for="message" class="sr-only">Mensaje</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tu Mensaje" class="input-field resize-y" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">
+                        Enviar Mensaje
+                    </button>
+                </form>
+                <div class="mt-8 text-gray-600">
+                    <p class="mb-2">También puedes encontrarme en:</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 transition duration-300">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.83 9.504.475.087.687-.206.687-.455 0-.224-.007-.975-.011-1.912-2.764.59-3.35-1.33-3.35-1.33-.45-.949-1.09-1.206-1.09-1.206-.89-.612.066-.6.066-.6 1.008.07 1.532 1.03 1.532 1.03.89 1.529 2.34 1.087 2.91.83.09-.64.35-1.087.636-1.332-2.22-.253-4.555-1.113-4.555-4.93 0-1.09.39-1.98 1.03-2.68-.104-.253-.448-1.27.097-2.659 0 0 .84-.27 2.75 1.025.79-.223 1.63-.335 2.47-.339.84.004 1.68.116 2.47.339 1.91-1.295 2.75-1.025 2.75-1.025.546 1.39.202 2.406.097 2.659.64.7 1.03 1.59 1.03 2.68 0 3.828-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.41-.012 2.727 0 .247.214.545.695.454C19.137 20.17 22 16.416 22 12.017 22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 transition duration-300">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19.5 2.25h-15A2.25 2.25 0 002.25 4.5v15A2.25 2.25 0 004.5 21.75h15A2.25 2.25 0 0021.75 19.5v-15A2.25 2.25 0 0019.5 2.25zM12 15.75a3.75 3.75 0 110-7.5 3.75 3.75 0 010 7.5zM16.5 6.75a.75.75 0 100-1.5.75.75 0 000 1.5z" />
+                                <path fill-rule="evenodd" d="M12 12.75a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-indigo-600 hover:text-indigo-800 transition duration-300">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M22 4.01c-.88.39-1.83.65-2.82.77.99-.59 1.75-1.54 2.1-2.65-.92.55-1.95.95-3.04 1.17C17.37 2.88 16.03 2 14.5 2c-2.75 0-5 2.25-5 5 0 .39.04.77.11 1.13C5.67 8.01 2.92 6.51 1.09 3.25c-.45.77-.7 1.66-.7 2.61 0 1.72.88 3.24 2.22 4.13-.82-.02-1.59-.25-2.26-.62v.06c0 2.43 1.73 4.46 4.02 4.92-.42.11-.86.17-1.31.17-.32 0-.64-.03-.94-.09.64 2.01 2.5 3.47 4.7 3.51-1.72 1.35-3.89 2.16-6.23 2.16-.41 0-.82-.02-1.22-.07 2.22 1.42 4.85 2.25 7.68 2.25 9.22 0 14.26-7.65 14.26-14.26 0-.22-.01-.44-.01-.66.98-.71 1.83-1.6 2.5-2.61z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 text-center rounded-t-3xl">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2025 Jorel Kales. Todos los derechos reservados.</p>
+            <div class="mt-4 text-sm text-gray-400">
+                <a href="#" class="hover:text-white mx-2">Política de Privacidad</a> |
+                <a href="#" class="hover:text-white mx-2">Términos de Servicio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Gemini API Integration for Marketing Strategy Generator
+        const generateStrategyBtn = document.getElementById('generate-strategy-btn');
+        const businessDescriptionInput = document.getElementById('business-description');
+        const strategyResultsDiv = document.getElementById('strategy-results');
+        const resultsContentDiv = document.getElementById('results-content');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const errorMessageDiv = document.getElementById('error-message');
+
+        generateStrategyBtn.addEventListener('click', async () => {
+            const businessDescription = businessDescriptionInput.value.trim();
+
+            // Clear previous results and errors
+            resultsContentDiv.innerHTML = '';
+            strategyResultsDiv.classList.add('hidden');
+            errorMessageDiv.classList.add('hidden');
+            errorMessageDiv.innerHTML = '';
+
+            if (!businessDescription) {
+                errorMessageDiv.classList.remove('hidden');
+                errorMessageDiv.innerHTML = 'Por favor, describe tu negocio para generar ideas de estrategia.';
+                return;
+            }
+
+            // Show loading spinner
+            loadingSpinner.style.display = 'inline-block';
+            generateStrategyBtn.disabled = true; // Disable button during loading
+
+            try {
+                let chatHistory = [];
+                const prompt = `Genera ideas de estrategia de marketing detalladas para un negocio que se describe de la siguiente manera: "${businessDescription}". Incluye secciones claras para:
+                - **Posicionamiento de Marca:** Cómo debería percibirse la marca.
+                - **Público Objetivo:** A quién se debe dirigir la estrategia.
+                - **Canales de Marketing:** Dónde se debe promocionar el negocio (digital y/o tradicional).
+                - **Tipo de Contenido:** Qué tipo de contenido se debe crear.
+                - **Mensajes Clave:** Ejemplos de mensajes que resuenen con el público.
+                - **Métricas de Éxito:** Cómo medir el éxito de la estrategia.
+
+                Formatea la respuesta usando Markdown para facilitar la lectura, con encabezados y listas.`;
+
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Canvas will provide this at runtime
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`Error de la API: ${response.status} - ${errorData.error.message || 'Error desconocido'}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    resultsContentDiv.innerHTML = marked.parse(text); // Use a Markdown parser if available, otherwise display raw text
+                    strategyResultsDiv.classList.remove('hidden');
+                } else {
+                    errorMessageDiv.classList.remove('hidden');
+                    errorMessageDiv.innerHTML = 'No se pudieron generar ideas de estrategia. Intenta con una descripción diferente.';
+                }
+            } catch (error) {
+                console.error('Error al llamar a la API de Gemini:', error);
+                errorMessageDiv.classList.remove('hidden');
+                errorMessageDiv.innerHTML = `Ocurrió un error: ${error.message}. Por favor, inténtalo de nuevo.`;
+            } finally {
+                loadingSpinner.style.display = 'none';
+                generateStrategyBtn.disabled = false; // Re-enable button
+            }
+        });
+
+        // Basic Markdown parser (for displaying results nicely)
+        // In a real application, you might use a library like 'marked.js' or 'DOMPurify'
+        // For simplicity, this is a very basic placeholder.
+        const marked = {
+            parse: function(markdown) {
+                // Replace basic markdown to HTML for display
+                let html = markdown;
+                html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>'); // H3
+                html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');   // H2
+                html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');    // H1
+                html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>'); // Bold
+                html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');     // Italic
+                html = html.replace(/^- (.*$)/gim, '<li>$1</li>');     // List items
+                html = html.replace(/(\n|^)<li>/gim, '<ul><li>');      // Start ul
+                html = html.replace(/<\/li>(\n|$)/gim, '</li></ul>');  // End ul
+                html = html.replace(/<\/ul><ul>/gim, '');              // Fix nested ul
+                html = html.replace(/\n/g, '<br>');                    // Newlines to <br>
+                return html;
+            }
+        };
+    </script>
 </body>
 </html>
